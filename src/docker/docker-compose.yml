@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  database:
+    container_name: db_apppersonalfinance
+    image: postgres:alpine
+    environment:
+      - POSTGRES_USER=appfinance
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=apppersonalfinance
+    ports:
+      - "5436:5432"
+    expose:
+      - "5436"
