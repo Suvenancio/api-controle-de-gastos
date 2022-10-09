@@ -19,18 +19,13 @@ export class Expense {
   date: Date;
 
   @Column()
-  total: number;
+  value: number;
 
   @Column()
   installmentsQty: number;
 
-  @Column()
-  totalToPay: number;
-
-  @Column()
-  dueDate: Date;
-
-  @ManyToOne(() => PaymentMethod, (paymentOption) => paymentOption.expense,)
-  @JoinColumn({ name: 'payment_method' })
+  @ManyToOne(() => PaymentMethod, (paymentMethod) => paymentMethod.expense)
+  @JoinColumn({ name: 'payment_method_id' })
   paymentMethod?: PaymentMethod;
+
 }

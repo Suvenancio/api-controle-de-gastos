@@ -74,9 +74,7 @@ export class ExpenseService {
 
   private async preLoadPayment(name: string): Promise<PaymentMethod> {
     const payment = await this.paymentMethodRepository.findOne( {where : { name }})
-    
-    console.log(payment)
-    
+
     if (payment) {
       return payment;
     }
