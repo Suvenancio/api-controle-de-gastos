@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  HttpCode,
   HttpException,
   HttpStatus,
   Param,
@@ -13,7 +12,6 @@ import {
 import { ExpenseDto } from './dto/expense.dto';
 import { ExpenseService } from './expense.service';
 
-
 @Controller('expense')
 export class ExpenseController {
   constructor(private readonly ExpenseService: ExpenseService) {}
@@ -21,9 +19,10 @@ export class ExpenseController {
   getExpense() {
     return this.ExpenseService.getAll();
   }
+
   @Get(':id')
   getAnExpense(@Param() params) {
-    const findedExpense = this.ExpenseService.getOne(params.id);
+    const findedExpense = this.ExpenseService.findById(params.id);
     if (!findedExpense) {
       throw new HttpException(
         `ID ${params.id} não encontrado `,
@@ -38,7 +37,7 @@ export class ExpenseController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateExpenseDto: ExpenseDto) {
+  update(@Param('id') id: number, @Body() updateExpenseDto: ExpenseDto) {
     return this.ExpenseService.update(id, updateExpenseDto);
   }
 
